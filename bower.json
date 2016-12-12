@@ -1,0 +1,25 @@
+{
+  "name": "Infinite Scroll Test",
+  "description": "Infinite Scroll Test",
+  "main": "build/index.html",
+  "authors": [
+    "Ruslan Hasko <ac.ruslanhasko@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.12.4",
+    "normalize-less": "*",
+    "jQuery-viewport-checker": "^1.8.7",
+    "animate.css": "^3.5.2"
+  }
+}
