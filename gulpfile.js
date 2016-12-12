@@ -25,6 +25,7 @@ var path = {
     html: 'build/',
     ico: 'build/',
     js: 'build/js/',
+    jsonData: 'build/json/',
     css: 'build/css/',
     img: 'build/images/',
     fonts: 'build/fonts/'
@@ -34,6 +35,8 @@ var path = {
     ico: 'src/*.ico',
     jsLibs: 'src/js/libs.js',
     jsMain: 'src/js/main.js',
+    jsAngular: 'src/js/app.js',
+    jsonData: 'src/json/*.json',
     style: 'src/css/style.less',
     img: 'src/images/*.*',
     fonts: 'src/fonts/'
@@ -43,6 +46,8 @@ var path = {
     ico: 'src/*.ico',
     jsLibs: 'src/js/libs.js',
     jsMain: 'src/js/main.js',
+    jsAngular: 'src/js/app.js',
+    jsonData: 'src/json/*.json',
     style: 'src/css/**/*.less',
     img: 'src/images/*.*',
     fonts: 'src/fonts/**/*.*'
@@ -97,12 +102,28 @@ gulp.task('jsMain:build', function () {
   gulp.src(path.src.jsMain)
       .pipe(rigger())
       .on('error', notify.onError(notifyOptions))
-      .pipe(sourcemaps.init())
+      // .pipe(sourcemaps.init())
+      // .on('error', notify.onError(notifyOptions))
+      // .pipe(uglify())
+      // .on('error', notify.onError(notifyOptions))
+      // .pipe(sourcemaps.write())
+      // .on('error', notify.onError(notifyOptions))
+      .pipe(gulp.dest(path.build.js))
       .on('error', notify.onError(notifyOptions))
-      .pipe(uglify())
+      .pipe(reload({stream: true}))
+      .on('error', notify.onError(notifyOptions));
+});
+
+gulp.task('jsAngular:build', function () {
+  gulp.src(path.src.jsAngular)
+      .pipe(rigger())
       .on('error', notify.onError(notifyOptions))
-      .pipe(sourcemaps.write())
-      .on('error', notify.onError(notifyOptions))
+      // .pipe(sourcemaps.init())
+      // .on('error', notify.onError(notifyOptions))
+      // .pipe(uglify())
+      // .on('error', notify.onError(notifyOptions))
+      // .pipe(sourcemaps.write())
+      // .on('error', notify.onError(notifyOptions))
       .pipe(gulp.dest(path.build.js))
       .on('error', notify.onError(notifyOptions))
       .pipe(reload({stream: true}))
@@ -116,11 +137,19 @@ gulp.task('css:build', function () {
       .on('error', notify.onError(notifyOptions))
       .pipe(prefixer())
       .on('error', notify.onError(notifyOptions))
-      .pipe(cssmin())
-      .on('error', notify.onError(notifyOptions))
-      .pipe(sourcemaps.write())
-      .on('error', notify.onError(notifyOptions))
+      // .pipe(cssmin())
+      // .on('error', notify.onError(notifyOptions))
+      // .pipe(sourcemaps.write())
+      // .on('error', notify.onError(notifyOptions))
       .pipe(gulp.dest(path.build.css))
+      .on('error', notify.onError(notifyOptions))
+      .pipe(reload({stream: true}))
+      .on('error', notify.onError(notifyOptions));
+});
+
+gulp.task('jsonData:build', function() {
+  gulp.src(path.src.jsonData)
+      .pipe(gulp.dest(path.build.jsonData))
       .on('error', notify.onError(notifyOptions))
       .pipe(reload({stream: true}))
       .on('error', notify.onError(notifyOptions));
@@ -146,7 +175,6 @@ gulp.task('fonts:build', function() {
       .on('error', notify.onError(notifyOptions))
       .pipe(reload({stream: true}))
       .on('error', notify.onError(notifyOptions));
-
 });
 
 
@@ -154,18 +182,22 @@ gulp.task('build', [
   'html:build',
   'jsLibs:build',
   'jsMain:build',
+  'jsAngular:build',
+  'jsonData:build',
   'css:build',
   'fonts:build',
   'img:build'
 ]);
 
 gulp.task('watch', function(){
-  gulp.watch(path.watch.html,   ['html:build']   );
-  gulp.watch(path.watch.style,  ['css:build']    );
-  gulp.watch(path.watch.jsLibs, ['jsLibs:build'] );
-  gulp.watch(path.watch.jsMain, ['jsMain:build'] );
-  gulp.watch(path.watch.img,    ['img:build']    );
-  gulp.watch(path.watch.fonts,  ['fonts:build']  );
+  gulp.watch(path.watch.html,       ['html:build']      );
+  gulp.watch(path.watch.style,      ['css:build']       );
+  gulp.watch(path.watch.jsLibs,     ['jsLibs:build']    );
+  gulp.watch(path.watch.jsMain,     ['jsMain:build']    );
+  gulp.watch(path.watch.jsAngular,  ['jsAngular:build'] );
+  gulp.watch(path.watch.jsonData,   ['jsonData:build']  );
+  gulp.watch(path.watch.img,        ['img:build']       );
+  gulp.watch(path.watch.fonts,      ['fonts:build']     );
 });
 
 gulp.task('server', function () {

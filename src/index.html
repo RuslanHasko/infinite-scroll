@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" ng-app='myApp'>
 
 <head>
     <meta charset="UTF-8">
@@ -9,11 +9,16 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body ng-controller='AppController'>
+
+  <ul class="images-container" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
+    <li class="item" ng-repeat='image in images'><div> </div></li>
+  </ul>
 
     <!-- All scripts linked here-->
     <script src="js/libs.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

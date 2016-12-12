@@ -1,2 +1,54 @@
-window.app={global:{initInfiniteScroll:function(){},init:function(){this.initInfiniteScroll()}}},$(function(){app.global.init()});
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uanMiXSwibmFtZXMiOlsid2luZG93IiwiYXBwIiwiZ2xvYmFsIiwiaW5pdEluZmluaXRlU2Nyb2xsIiwiaW5pdCIsInRoaXMiLCIkIl0sIm1hcHBpbmdzIjoiQUFBQUEsT0FBT0MsS0FDSEMsUUFFSUMsbUJBQW9CLGFBRXBCQyxLQUFNLFdBQ0ZDLEtBQUtGLHdCQU9qQkcsRUFBRSxXQUNFTCxJQUFJQyxPQUFPRSIsImZpbGUiOiJtYWluLmpzIiwic291cmNlc0NvbnRlbnQiOlsid2luZG93LmFwcCA9IHtcclxuICAgIGdsb2JhbDoge1xyXG5cclxuICAgICAgICBpbml0SW5maW5pdGVTY3JvbGw6IGZ1bmN0aW9uKCkge30sXHJcblxyXG4gICAgICAgIGluaXQ6IGZ1bmN0aW9uKCkge1xyXG4gICAgICAgICAgICB0aGlzLmluaXRJbmZpbml0ZVNjcm9sbCgpO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICB9XHJcbn1cclxuXHJcbi8vIEluaXRpYWxpemUgYWxsIGZ1bmN0aW9uc1xyXG4kKGZ1bmN0aW9uKCkge1xyXG4gICAgYXBwLmdsb2JhbC5pbml0KCk7XHJcbn0pIl19
+// window.app = {
+//     global: {
+//
+//         initInfiniteScroll: function() {
+//             $('.images-container').jscroll({
+//               debug (true),
+//               // loadingHtml: '<img src="loading.gif" alt="Loading" /> Loading...',
+//               padding: 20,
+//               // nextSelector: 'a.jscroll-next:last',
+//               contentSelector: 'li'
+//             });
+//         },
+//
+//         init: function() {
+//             this.initInfiniteScroll();
+//         }
+//
+//     }
+// }
+
+// Initialize all functions
+$(function() {
+    // app.global.init();
+
+    $(window).on('load resize', imagesResize);
+
+    function imagesResize() {
+        if (!($('.item:nth-child(2)').length > 0)) {
+            console.info('Absent');
+            $('.item:nth-child(1)').addClass('singleItem');
+        };
+        if (!($('.item:nth-child(3)')).length > 0) {
+            $('.item:nth-child(1)').addClass('twoItems');
+            $('.item:nth-child(2)').addClass('twoItems');
+        };
+
+        var width = $('.item').width();
+        var height = width - 25;
+        $('.item').height(height);
+
+        var widthThirdChild = $('.item:nth-child(3n)').width();
+        var heightThirdChild = widthThirdChild - 25;
+        $('.item:nth-child(3n)').height(heightThirdChild);
+
+        var wHeight = $('body').height();
+        var halfWHeight = wHeight / 2
+        $('.images-container').css({
+            'padding-top': halfWHeight + 'px',
+            'transform': 'translateY(-' + height / 2 + 'px)'
+        });
+
+    }
+
+})

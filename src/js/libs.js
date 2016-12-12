@@ -1,2 +1,3 @@
 //= ../../bower_components/jquery/dist/jquery.js
-//= ../js/libs/jScroll/jquery.jscroll.js
+//= ../../bower_components/angular/angular.js
+//= ../../bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js
